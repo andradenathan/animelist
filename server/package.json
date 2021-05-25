@@ -1,0 +1,22 @@
+{
+  "name": "animelist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node-dev --no-notify src/app.js",
+    "migrate": "node src/database/migrate.js",
+    "keys": "node src/config/generateRSAKeys.js"
+  },
+  "author": "Nathan Andrade",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "node-dev": "^7.0.0",
+    "sequelize": "^6.6.2",
+    "sqlite3": "^5.0.2"
+  }
+}
