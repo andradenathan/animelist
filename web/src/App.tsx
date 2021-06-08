@@ -4,9 +4,9 @@ import './styles/pages/home.css';
 
 function App() {
   return (
-    <div id="home-top">
+  <div id="homepage">
       <div className="home-top-contents">
-      <h1>Animelist</h1>
+      <h1 className="top-text">Animelist</h1>
         <div className="home-top-right-menu">
           <div className="menu-content">
             <div className="signin-button">Sign In</div>
@@ -16,6 +16,20 @@ function App() {
           <div className="signup-button">Sign Up</div>
           </div>
 
+        </div>
+      </div>
+     
+      <div className="home-body-section">
+        <div className="home-body-content">
+          <h1>Most Popular Animes</h1>
+          <div className="home-body-content-box">
+            <div className="home-body-slide">
+              quadrado aqui
+            </div>
+            <div className="home-body-slide-description">
+              descrição aqui
+            </div>
+          </div>
         </div>
       </div>
     </div>

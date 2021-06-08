@@ -1,19 +1,22 @@
-#home-top {
+#homepage {
     width: 100vw;
-    height: 6.5vh;
-    background: #4A5568;
+    height: 100vh;
 }
 
 .home-top-contents {
     display: flex;
     justify-content: space-between;
-
-    margin-left: 30px;
+    height: 6.5vh;
+    background: #4A5568;
 }
 
 .home-top-right-menu {
     display: flex;
     justify-content: flex-end;
+}
+
+.top-text {
+    margin-left: 2%;
 }
 
 .menu-content {
@@ -62,4 +65,26 @@
 .signin-button:hover {
     color: black;
     background-color: rgb(231, 228, 228); 
+}
+
+.home-body-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.home-body-content {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.home-body-content-box {
+    display: flex;
+    margin-top: 10%;
+}
+
+.home-body-slide {
+    display: flex;
+    margin-right: 5%;
 }
