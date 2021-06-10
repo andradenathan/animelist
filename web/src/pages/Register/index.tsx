@@ -1,17 +1,31 @@
 import '../../styles/pages/register.css';
-import { useForm, Controller } from 'react-hook-form';
+import UserService from '../../services/User/index';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 interface RegisterData {
     username: string,
     email: string,
     password: string,
-    birthday: string,
+    date_of_birth: string,
 }
 
 function Register() {
     const { register, handleSubmit } = useForm();
-    const onSubmit = (data: RegisterData) => {
-        console.log(data);
+    const { push } = useHistory();
+    
+    const onSubmit = async (data: any) => {
+        data.date_of_birth = data.year + "/" + data.month + "/" + data.day;
+        delete data.day;
+        delete data.month;
+        delete data.year;
+        try {
+            await UserService.register(data);
+            push('/');
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     return (
@@ -23,7 +37,6 @@ function Register() {
 
             <div className="register-form-background">
                 <div className="register-form">
-
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <label>
                         <p>Username: </p> 
@@ -42,33 +55,31 @@ function Register() {
 
                         <label>
                             <p>Birthday: </p>
-                            <select>
-                                <option value="0">-</option>
-                                <option value="1">January</option>
-                                <option value="2">February</option>
-                                <option value="3">March</option>
-                                <option value="4">April</option>
-                                <option value="5">May</option>
-                                <option value="6">June</option>
-                                <option value="7">July</option>
-                                <option value="8">August</option>
-                                <option value="9">September</option>
+                            <select {...register('month')}>
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
                                 <option value="10">October</option>
                                 <option value="11">November</option>
                                 <option value="12">December</option>
                             </select>
                             -
-                            <select>
-                                <option value="0">-</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
+                            <select {...register('day')}>
+                                <option value="01">1</option> 
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
                                 <option value="10">10</option>
                                 <option value="11">11</option>
                                 <option value="12">12</option>
@@ -93,8 +104,7 @@ function Register() {
                                 <option value="31">31</option>
                             </select>
                             -
-                            <select>
-                                <option value="0">-</option>
+                            <select {...register('year')}>
                                 <option value="2021">2021</option>
                                 <option value="2020">2020</option>
                                 <option value="2019">2019</option>
@@ -126,15 +136,14 @@ function Register() {
                                 <option value="1993">1993</option>
                                 <option value="1992">1992</option>
                                 <option value="1991">1991</option>
-                                <option value="1990">1990</option>
-                                
+                                <option value="1990">1990</option>              
                             </select>
                         </label>
 
+                       <button className="register-form-button" onSubmit={handleSubmit(onSubmit)}>
+                    Create your account</button>
                     </form>
-                    <div className="register-form-button" onSubmit={handleSubmit(onSubmit)}>
-                        Create your account
-                    </div>
+
                 </div>
             </div>
         </div>
