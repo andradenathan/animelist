@@ -18,9 +18,18 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING
     },
 
+    photo: {
+        type: DataTypes.STRING
+    },
+
     date_of_birth: {
         type: DataTypes.DATEONLY,
         allowNull: false
+    },
+
+    status: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: 0
     }
 });
 
