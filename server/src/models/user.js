@@ -33,4 +33,8 @@ const User = sequelize.define('User', {
     }
 });
 
+User.associate = function(models) {
+    User.hasMany(models.Anime, {as: "animeList", foreignKey: "animeId"})
+}
+
 module.exports = User;

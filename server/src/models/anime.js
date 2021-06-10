@@ -6,5 +6,25 @@ const Anime = sequelize.define('Anime', {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
+    },
+
+    episodes: {
+        type: DataTypes.STRING
+    },
+
+    status: {
+        type: DataTypes.STRING,
+    },
+
+    score: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+    },
+
+    photo: {
+        type: DataTypes.STRING
     }
+
 });
+
+module.exports = Anime;
