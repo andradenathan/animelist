@@ -1,3 +1,4 @@
+const Auth = require('../config/auth');
 const User = require('../models/user');
 const Anime = require('../models/anime');
 
@@ -16,10 +17,15 @@ const getUserAnimes = async(req, res) => {
 }
 
 const create = async(req, res) => {
+    const generateHash = Auth.generateHash(req.body.password);
+    const salt = generateHash.salt;
+    const hash = generateHash.hash;
+
     const data = {
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password,
+        salt: salt,
+        hash: hash,
         date_of_birth: req.body.date_of_birth
     }
 

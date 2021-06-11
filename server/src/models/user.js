@@ -14,10 +14,14 @@ const User = sequelize.define('User', {
         unique: true
     },
 
-    password: {
+    salt: {
         type: DataTypes.STRING
     },
 
+    hash: {
+        type: DataTypes.STRING
+    },
+    
     photo: {
         type: DataTypes.STRING
     },
