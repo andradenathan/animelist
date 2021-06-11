@@ -1,6 +1,7 @@
 const Users = require('../controllers/users');
 const Animes = require('../controllers/animes');
 const Passports = require('../controllers/passports');
+
 const { Router } = require('express');
 const passport = require('passport');
 
@@ -13,10 +14,10 @@ router.post('/auth/login', Passports.login);
 
 router.get('/getUserAnimes/:id', Users.getUserAnimes);
 router.get('/users', Users.index);
-router.get('/users/:id', Users.show);
-router.put('/users/:id', Users.update);
-router.post('/users', Users.create);
-router.delete('/users/:id', Users.destroy);
+router.get('/user/:id', Users.show);
+router.put('/user/:id', Users.update);
+router.post('/user', Users.create);
+router.delete('/user', Users.destroy);
 
 router.get('/animes', Animes.index);
 router.get('/animes/:id', Animes.show);

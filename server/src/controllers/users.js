@@ -62,7 +62,7 @@ const update = async(req, res) => {
         const [updated] = await User.update(req.body, {where: {id: id}});
         if (updated) {
             const user = await User.findByPk(id);
-            return res.status(200).json({user});
+            return res.status(200).json({"success": user});
         }
         throw new Error('User not found');
         
@@ -72,15 +72,17 @@ const update = async(req, res) => {
 }
 
 const destroy = async(req, res) => {
-    const {id} = req.params;
     try {
-        const [deleted] = await User.destroy({where: {id: id}});
+        const token = Auth.getToken(req);
+        const user = Auth.user(token);
+        const deleted = await User.destroy({where: {id: user.sub}});
         if(deleted) {
-            return res.status(200).json("User successfully deleted");
+            return res.status(200).json({"success": "User successfully deleted"});
+        } else {
+            return res.status(500).json({"error": "User not found"});
         }
-        throw new Error('User not found');
     } catch(err) {
-        return res.status(500).json({err});
+        return res.status(500).json({"error": "Internal Server Error"});
     }
 }
 
