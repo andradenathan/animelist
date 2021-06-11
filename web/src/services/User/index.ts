@@ -8,7 +8,7 @@ const route = axios.create({
 export default {
     async register(form: any) {
         try {
-            const response = await route.post('/users', form);
+            const response = await route.post('/auth/register', form);
             alert('Usuário cadastrado com sucesso!');
             console.log('dados do usuário: ', response.data);
         } catch(err) {
