@@ -59,7 +59,7 @@ const destroy = async(req, res) => {
     const { id } = req.params;
     try {
         const [destroyed] = await Anime.destroy({where: {id: id}});
-        if (deleted) {
+        if (destroyed) {
             return res.status(200).json('Anime successfully deleted');
         }
         throw new Error('Anime not found or already deleted');
@@ -73,5 +73,5 @@ module.exports = {
     index,
     show,
     update,
-    destroy
+    destroy,
 }

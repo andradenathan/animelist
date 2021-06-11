@@ -4,6 +4,7 @@ const { Router } = require('express');
 
 const router = Router();
 
+router.get('/getUserAnimes/:id', Users.getUserAnimes);
 router.get('/users', Users.index);
 router.get('/users/:id', Users.show);
 router.put('/users/:id', Users.update);

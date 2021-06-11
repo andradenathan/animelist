@@ -1,4 +1,19 @@
 const User = require('../models/user');
+const Anime = require('../models/anime');
+
+const getUserAnimes = async(req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findByPk(id, {include: [{model: Anime,
+            as: "animeList"
+        }]});
+
+        return res.status(200).json({user});
+        
+    } catch(err) {
+        return res.status(500).json(err + "!");
+    }
+}
 
 const create = async(req, res) => {
     const data = {
@@ -68,5 +83,6 @@ module.exports = {
     index,
     show,
     update,
-    destroy
+    destroy,
+    getUserAnimes
 }
