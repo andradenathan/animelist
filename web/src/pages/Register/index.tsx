@@ -20,6 +20,7 @@ function Register() {
         delete data.day;
         delete data.month;
         delete data.year;
+
         try {
             await UserService.register(data);
             push('/');

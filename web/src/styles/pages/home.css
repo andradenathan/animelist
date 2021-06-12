@@ -91,3 +91,33 @@ body {
     display: flex;
     margin-right: 5%;
 }
+
+.slider {
+    height: 50vh;
+    display: flex;
+}
+
+.image {
+    width: 226px;
+    height: 317px;
+    border-radius: 10px;
+}
+
+.right-arrow {
+    position: absolute;
+    top: 55%;
+    right: 610px;
+    font-size: 2rem;
+    color: #000;
+    cursor: pointer;
+    user-select: none;
+}
+
+.left-arrow {
+    position: absolute;
+    top: 55%;
+    left: 500px;
+    font-size: 2rem;
+    color: #000;
+    cursor: pointer;
+}

@@ -1,4 +1,6 @@
 import '../../styles/pages/home.css';
+import ImageSlider from '../../components/images';
+import { SlidesData } from "../../components/sliderData";
 
 function Home() {
     return (
@@ -21,12 +23,15 @@ function Home() {
           <div className="home-body-content">
             <h1>Most Popular Animes</h1>
             <div className="home-body-content-box">
+
               <div className="home-body-slide">
-                quadrado aqui
+                <ImageSlider {...SlidesData}/>
               </div>
+
               <div className="home-body-slide-description">
-                descrição aqui
+                description here
               </div>
+
             </div>
           </div>
         </div>
