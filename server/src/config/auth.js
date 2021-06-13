@@ -31,7 +31,8 @@ const generateJWT = (user) => {
         username: user.username,
         email: user.email,
         date_of_birth: user.date_of_birth,
-        status: user.status
+        status: user.status,
+        photo: user.photo
     }
 
     return jsonwebtoken.sign(payload, PRIV_KEY, { expiresIn: '7d', 

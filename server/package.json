@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node-dev --no-notify src/app.js",
     "migrate": "node src/database/migrate.js",
+    "seed": "node src/database/seeders/seeder.js",
     "keys": "node src/config/generateRSAKeys.js"
   },
   "author": "Nathan Andrade",
@@ -15,7 +16,9 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "faker": "^5.5.3",
     "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
     "node-dev": "^7.0.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",

@@ -8,6 +8,11 @@ const Anime = sequelize.define('Anime', {
         unique: true
     },
 
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+
     episodes: {
         type: DataTypes.STRING
     },
@@ -26,5 +31,10 @@ const Anime = sequelize.define('Anime', {
     }
 
 });
+
+Anime.associate = function(models) {
+    Anime.belongsToMany(models.User, {as: "users", foreignKey: "animeId", 
+        through: 'List'});
+}
 
 module.exports = Anime;

@@ -38,7 +38,8 @@ const User = sequelize.define('User', {
 });
 
 User.associate = function(models) {
-    User.hasMany(models.Anime, {as: "animeList", foreignKey: "animeId"})
+    User.belongsToMany(models.Anime, {as: "animeList", foreignKey: "userId", 
+        through: 'List'});
 }
 
 module.exports = User;
