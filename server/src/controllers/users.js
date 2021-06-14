@@ -15,7 +15,7 @@ const addAnimeToList = async(req, res) => {
             return res.status(200).json({"success": `The anime ${anime.title} was successfully added into your list!`});
         }
     } catch(err) {
-        return res.status(500).json(err + "!");
+        return res.status(500).json({"error": err + "!"});
     }
 }
 
@@ -25,10 +25,10 @@ const getUserAnimes = async(req, res) => {
         const user = await User.findByPk(id, {include: [{as: "animeList", 
             model: Anime}]});
 
-        return res.status(200).json({user});
+        return res.status(200).json({"success": user});
         
     } catch(err) {
-        return res.status(500).json(err + "!");
+        return res.status(500).json({"error": err + "!"});
     }
 }
 
@@ -48,19 +48,19 @@ const create = async(req, res) => {
 
     try {
         const user = await User.create(data);
-        return res.status(201).json({user});
+        return res.status(201).json({"success": user});
         
     } catch(err) {
-        return res.status(500).json(err + "!");
+        return res.status(500).json({"error": err + "!"});
     }
 }
 
 const index = async(req, res) => {
     try {
         const users = await User.findAll();
-        return res.status(200).json({users});
+        return res.status(200).json({"success": users});
     } catch(err) {
-        return res.status(500).json({err});
+        return res.status(500).json({"error": err + "!"});
     }
 }
 
@@ -68,9 +68,9 @@ const show = async(req, res) => {
     const {id} = req.params;
     try {
         const user = await User.findByPk(id);
-        return res.status(200).json({user});
+        return res.status(200).json({"success": user});
     } catch(err) {
-        return res.status(500).json({err});
+        return res.status(500).json({"error": err + "!"});
     }
 }
 
