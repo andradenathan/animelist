@@ -41,7 +41,7 @@ const generateJWT = (user) => {
 
 const getToken = (req) => {
     const header = req.get('Authorization');
-    if (!header) return error;
+    if (!header) return "Error";
     return header.split(' ')[1];
 }
 

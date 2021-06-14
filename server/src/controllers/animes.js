@@ -1,7 +1,8 @@
 const Anime = require('../models/anime');
 const Auth = require('../config/auth');
-const User = require('../models/user');
+const User = require('../controllers/users');
 require('../config/dotenv');
+
 
 const create = async(req, res) => {
     const data = {
@@ -37,24 +38,26 @@ const show = async(req, res) => {
         const anime = await Anime.findByPk(id);
         return res.status(200).json({anime});
     } catch(err) {
-        return res.status(500).json({anime});
+        return res.status(500).json(err + "!");
     }
 }
 
 const update = async(req, res) => {
     const { id } = req.params;
     try {
+        //const token = Auth.getToken(req);
+        //const user = Auth.user(token);
         const [updated] = await Anime.update(req.body, {where: {id: id}}); 
 
         if (updated) {
-            const anime = await Anime.findByPk(id);
+            const anime = await Anime.findByPk(id)
             return res.status(200).json({anime});
         }
         
         throw new Error('Anime not found');
 
     } catch(err) {
-        res.status(500).json(err);
+        res.status(500).json(err + "!");
     }
 }
 

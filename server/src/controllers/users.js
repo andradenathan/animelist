@@ -3,6 +3,22 @@ const User = require('../models/user');
 const Anime = require('../models/anime');
 require('../config/dotenv');
 
+const addAnimeToList = async(req, res) => {
+    const token = Auth.getToken(req);
+    const user = Auth.user(token);
+    try {
+        const loggedUser = await User.findByPk(user.sub, {include: [{as: "animeList",
+        model: Anime}]});
+        const anime = await Anime.findByPk(req.params.id);
+        addAnime = await loggedUser.addAnimeList(anime);
+        if (addAnime) {
+            return res.status(200).json({"success": `The anime ${anime.title} was successfully added into your list!`});
+        }
+    } catch(err) {
+        return res.status(500).json(err + "!");
+    }
+}
+
 const getUserAnimes = async(req, res) => {
     const { id } = req.params;
     try {
@@ -91,6 +107,7 @@ const destroy = async(req, res) => {
 }
 
 module.exports = {
+    addAnimeToList,
     create,
     index,
     show,
