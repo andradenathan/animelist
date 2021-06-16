@@ -7,13 +7,35 @@ const addAnimeToList = async(req, res) => {
     const token = Auth.getToken(req);
     const user = Auth.user(token);
     try {
-        const loggedUser = await User.findByPk(user.sub, {include: [{as: "animeList",
-        model: Anime}]});
+        const loggedUser = await User.findByPk(user.sub, {include: [{
+            as: "animeList", model: Anime}]});
         const anime = await Anime.findByPk(req.params.id);
-        addAnime = await loggedUser.addAnimeList(anime);
-        if (addAnime) {
-            return res.status(200).json({"success": `The anime ${anime.title} was successfully added into your list!`});
-        }
+        const inList = loggedUser.animeList.filter((addedAnime) => {
+            if(addedAnime.id == anime.id) return addedAnime;
+        });
+
+        if (inList.length !== 0 ) return res.status(200).json("O anime já está na lista!");
+        await loggedUser.addAnimeList(anime);
+        return res.status(200).json({"success": `The anime ${anime.title} was successfully added into your list!`});
+    } catch(err) {
+        return res.status(500).json({"error": err + "!"});
+    }
+}
+
+const removeAnimeFromList = async(req, res) => {
+    const token = Auth.getToken(req);
+    const user = Auth.user(token);
+    try {
+        const loggedUser = await User.findByPk(user.sub, {include: [{
+            as: "animeList", model: Anime}]});
+        const anime = await Anime.findByPk(req.params.id);
+        const notInList = loggedUser.animeList.filter((addedAnime) => {
+            if (addedAnime.id == anime.id) return addedAnime;
+        });
+        
+        if (notInList.length === 0 ) return res.status(200).json("O anime não está na lista!");
+        await loggedUser.removeAnimeList(anime);
+        return res.status(200).json({"success": `The anime ${anime.title} was successfully removed from your list!`});
     } catch(err) {
         return res.status(500).json({"error": err + "!"});
     }
@@ -108,6 +130,7 @@ const destroy = async(req, res) => {
 
 module.exports = {
     addAnimeToList,
+    removeAnimeFromList,
     create,
     index,
     show,

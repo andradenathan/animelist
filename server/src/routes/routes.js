@@ -20,6 +20,7 @@ router.get('/getUserAnimes/:id', Users.getUserAnimes);
 router.get('/users', Users.index);
 router.get('/user/:id', Users.show);
 router.put('/addAnimeToList/:id', Users.addAnimeToList);
+router.put('/removeAnimeFromList/:id', Users.removeAnimeFromList);
 router.put('/user/:id', singleUpload, Users.update);
 //router.post('/user', Users.create);
 router.delete('/user', Users.destroy);
