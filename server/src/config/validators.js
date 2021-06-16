@@ -26,6 +26,4 @@ const validateUser = (method) => {
     }
 }
 
-module.exports = {
-    validateUser
-}
+module.exports = validateUser;

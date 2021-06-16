@@ -1,6 +1,10 @@
 const Auth = require('../config/auth');
+const path = require('path');
 const { validationResult } = require('express-validator');
 require('../config/dotenv');
+
+const hbs = require('nodemailer-express-handlebars');
+const mail = require('../config/mail');
 
 const User = require('../models/user');
 const Anime = require('../models/anime');
@@ -56,6 +60,28 @@ const getUserAnimes = async(req, res) => {
     }
 }
 
+const sendRegisterConfirmMail = function(user) {
+    const pathToTemplate = path.resolve(__dirname, '..', '..', 'templates/');
+    mail.use('compile', hbs({
+        viewEngine: {
+            extName: ".handlebars",
+            partialsDir: pathToTemplate,
+            defaultLayout: false
+        },
+        viewPath: pathToTemplate,
+        extName: ".handlebars"
+    }));
+
+    const message = {
+        to: user.email,
+        subject: "Confirm your register",
+        template: "confirmRegister"
+    }
+    
+    try { mail.sendMail(message) } 
+    catch(err) { console.log(err + "!"); }
+}
+
 const create = async(req, res) => {
     const generateHash = Auth.generateHash(req.body.password);
     const salt = generateHash.salt;
@@ -73,8 +99,9 @@ const create = async(req, res) => {
     try {
         validationResult(req).throw();
         const user = await User.create(data);
+        sendRegisterConfirmMail(user);
         return res.status(201).json({"success": user});
-        
+
     } catch(err) {
         return res.status(500).json({"error": err + "!"});
     }
