@@ -2,7 +2,12 @@ const Anime = require('../models/anime');
 require('../config/dotenv');
 
 const listAnimeByScore = async(req, res) => {
-    //TODO
+    try { 
+        const animes = await Anime.findAll({order: [['score', 'DESC']]});
+        return res.status(200).json({"success": {animes}});
+    } catch(err) {
+        return res.status(500).json({"error": err + "!"});
+    }
 }
 
 const create = async(req, res) => {
