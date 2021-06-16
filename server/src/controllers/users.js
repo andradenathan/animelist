@@ -3,8 +3,7 @@ const path = require('path');
 const { validationResult } = require('express-validator');
 require('../config/dotenv');
 
-const hbs = require('nodemailer-express-handlebars');
-const mail = require('../config/mail');
+const { sendRegisterConfirmMail } = require('../../templates/confirmRegister');
 
 const User = require('../models/user');
 const Anime = require('../models/anime');
@@ -20,7 +19,9 @@ const addAnimeToList = async(req, res) => {
             if(addedAnime.id == anime.id) return addedAnime;
         });
 
-        if (inList.length !== 0 ) return res.status(200).json("O anime já está na lista!");
+        if (inList.length !== 0) 
+        return res.status(200).json("O anime já está na lista!");
+        
         await loggedUser.addAnimeList(anime);
         return res.status(200).json({"success": `The anime ${anime.title} was successfully added into your list!`});
     } catch(err) {
@@ -39,7 +40,8 @@ const removeAnimeFromList = async(req, res) => {
             if (addedAnime.id == anime.id) return addedAnime;
         });
         
-        if (notInList.length === 0 ) return res.status(200).json("O anime não está na lista!");
+        if (notInList.length === 0) 
+        return res.status(200).json("O anime não está na lista!");
         await loggedUser.removeAnimeList(anime);
         return res.status(200).json({"success": `The anime ${anime.title} was successfully removed from your list!`});
     } catch(err) {
@@ -58,28 +60,6 @@ const getUserAnimes = async(req, res) => {
     } catch(err) {
         return res.status(500).json({"error": err + "!"});
     }
-}
-
-const sendRegisterConfirmMail = function(user) {
-    const pathToTemplate = path.resolve(__dirname, '..', '..', 'templates/');
-    mail.use('compile', hbs({
-        viewEngine: {
-            extName: ".handlebars",
-            partialsDir: pathToTemplate,
-            defaultLayout: false
-        },
-        viewPath: pathToTemplate,
-        extName: ".handlebars"
-    }));
-
-    const message = {
-        to: user.email,
-        subject: "Confirm your register",
-        template: "confirmRegister"
-    }
-    
-    try { mail.sendMail(message) } 
-    catch(err) { console.log(err + "!"); }
 }
 
 const create = async(req, res) => {
