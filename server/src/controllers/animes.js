@@ -1,8 +1,9 @@
 const Anime = require('../models/anime');
-const Auth = require('../config/auth');
-const User = require('../controllers/users');
 require('../config/dotenv');
 
+const listAnimeByScore = async(req, res) => {
+    //TODO
+}
 
 const create = async(req, res) => {
     const data = {
@@ -78,4 +79,5 @@ module.exports = {
     show,
     update,
     destroy,
+    listAnimeByScore
 }

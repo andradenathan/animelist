@@ -1,7 +1,9 @@
 const Auth = require('../config/auth');
+const { validationResult } = require('express-validator');
+require('../config/dotenv');
+
 const User = require('../models/user');
 const Anime = require('../models/anime');
-require('../config/dotenv');
 
 const addAnimeToList = async(req, res) => {
     const token = Auth.getToken(req);
@@ -69,6 +71,7 @@ const create = async(req, res) => {
     }
 
     try {
+        validationResult(req).throw();
         const user = await User.create(data);
         return res.status(201).json({"success": user});
         
