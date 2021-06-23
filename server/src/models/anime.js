@@ -17,6 +17,10 @@ const Anime = sequelize.define('Anime', {
         type: DataTypes.STRING
     },
 
+    season: {
+        type: DataTypes.STRING
+    },
+
     status: {
         type: DataTypes.STRING,
     },

@@ -20,7 +20,7 @@ const addAnimeToList = async(req, res) => {
         });
 
         if (inList.length !== 0) 
-        return res.status(200).json("O anime já está na lista!");
+        return res.status(200).json("This anime is already in your list!");
         
         await loggedUser.addAnimeList(anime);
         return res.status(200).json({"success": `The anime ${anime.title} was successfully added into your list!`});

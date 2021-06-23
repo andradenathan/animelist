@@ -26,6 +26,7 @@ router.put('/user/:id', singleUpload, Users.update);
 router.delete('/user', Users.destroy);
 
 router.get('/listAnimeByScore', Animes.listAnimeByScore);
+router.get('/getSeasonalAnimes', Animes.getSeasonalAnimes);
 router.get('/animes', Animes.index);
 router.get('/anime/:id', Animes.show);
 router.put('/anime/:id', Animes.update);
