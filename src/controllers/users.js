@@ -1,5 +1,5 @@
 const Auth = require('../config/auth');
-const path = require('path');
+
 const { validationResult } = require('express-validator');
 require('../config/dotenv');
 
@@ -13,7 +13,9 @@ const addAnimeToList = async(req, res) => {
     const user = Auth.user(token);
     try {
         const loggedUser = await User.findByPk(user.sub, {include: [{
-            as: "animeList", model: Anime}]});
+            as: "animeList", model: Anime
+        }
+    ]});
         const anime = await Anime.findByPk(req.params.id);
         const inList = loggedUser.animeList.filter((addedAnime) => {
             if(addedAnime.id == anime.id) return addedAnime;

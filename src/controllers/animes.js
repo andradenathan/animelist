@@ -4,9 +4,7 @@ require('../config/dotenv');
 
 const getSeasonalAnimes = async(req, res) => {
     try {
-        const animes = await Anime.findAll({where: {
-            status: 'Currently Airing'
-        }});
+        const animes = await Anime.findAll({where: {status: 'Currently Airing'}});
         return res.status(200).json({"success": animes});
     } catch(err) {
         return res.status(500).json({"error": err});
