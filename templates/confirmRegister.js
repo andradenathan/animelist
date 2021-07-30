@@ -1,5 +1,5 @@
 const hbs = require('nodemailer-express-handlebars');
-const mail = require('../config/mail');
+const mail = require('../src/config/mail');
 
 const sendRegisterConfirmMail = function(user) {
     const pathToTemplate = path.resolve(__dirname, '..', '..', 'templates/');

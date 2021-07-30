@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "node-dev --no-notify src/app.js",
     "migrate": "node src/database/migrate.js",
     "seed": "node src/database/seeders/seeder.js",
@@ -27,5 +27,8 @@
     "passport-jwt": "^4.0.0",
     "sequelize": "^6.6.2",
     "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
   }
 }
