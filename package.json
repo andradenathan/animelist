@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --setupFiles dotenv/config",
     "dev": "node-dev --no-notify src/app.js",
     "migrate": "node src/database/migrate.js",
     "seed": "node src/database/seeders/seeder.js",
